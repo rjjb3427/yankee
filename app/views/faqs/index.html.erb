@@ -1,0 +1,43 @@
+<section id="faq_main" class="sub_main">
+	<div class="section_top">
+		<h2><%=@board_name %></h2>
+	</div>
+	<%= render :partial => 'layouts/ad' %>	
+	<article>
+		<ol id="faqCategoryList">
+			<% if(@faq_categories.length>0) %>			
+			<% @faq_categories.each do |faq_category| %>			
+			<li><%= link_to truncate(faq_category.title,:length => 20),faqs_path(:faq_category_id=>faq_category.id) %></li>
+			<% end %>
+  			<% else %>	
+			<li>분류가 없습니다.</li>
+			<% end %>
+		</ol>		
+	</article>
+	<article>
+		<dl id="faqList">
+			<% if(@faqs.length>0) %>			
+			<% @faqs.each do |faq| %>
+			<dt <% if @faq %><% if @faq.id==faq.id %>class="on"<% end %><% end %>><%= link_to truncate(faq.title,:length => 80), faqs_path(:faq_category_id=>params[:faq_category_id],:id=>faq) %></dt>
+		
+		<% if(@faq)%>	
+			<% if(faq.id==@faq.id) %>
+					<dd><%=simple_format(@faq.faq_content.content) %></dd>
+			<% end %>
+		<% end %>
+			
+			<% end %>	
+  			<% else %>	
+  			
+			<% end %>
+		</dl>
+	</article>
+	<div id="sl_bottom_menu">
+		<% if user_signed_in? %>
+		<% if current_user.admin? %>
+		<%= link_to "글쓰기",new_faq_path %>
+		<% end %>
+		<% end %>
+	<div class="flickr_pagination"><%= paginate @faqs %></div>	
+	</div>
+</section>

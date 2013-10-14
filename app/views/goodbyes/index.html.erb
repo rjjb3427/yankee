@@ -1,0 +1,23 @@
+<h1>Listing goodbyes</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @goodbyes.each do |goodbye| %>
+  <tr>
+    <td><%= goodbye.title %></td>
+    <td><%= link_to 'Show', goodbye %></td>
+    <td><%= link_to 'Edit', edit_goodbye_path(goodbye) %></td>
+    <td><%= link_to 'Destroy', goodbye, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Goodbye', new_goodbye_path %>

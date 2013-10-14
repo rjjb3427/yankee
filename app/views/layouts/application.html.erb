@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>많이 있었다 아이가? 이제 제발좀 꺼져줘 |  www.soojung.kr</title>
+<meta charset="utf-8">	
+<meta name="robots" content="all, index, follow" />
+<meta name="application-name" content="예쁘고 귀여운 수정이의 홈페이지" />
+<meta name="keywords" content="수정,인수정,수정이,soojung,crystal,정종호,요리,레시피,애교,애완동물,짬순이,멍군이,말티즈,비봉고등학교,수원고등학교" />
+<meta name="description" content="예쁘고 귀여운 수정이의 홈페이지입니다." />
+<meta name="author" content="Sleeping-Lion" />
+<link rel="shortcut icon" href="/assets/favicon.ico" />
+<%= stylesheet_link_tag @style, :media => "all" %>
+<%= csrf_meta_tags %>
+</head>
+<body id="main_page">
+<!--[if lt IE 9]>	
+<%= javascript_include_tag "/assets/html5.js" %>	
+<%= stylesheet_link_tag "/assets/ie.css", :media => "all" %>
+<![endif]-->
+<%= render :partial => 'layouts/header' %>
+<div id="mom">
+	<div id="main">
+		<div class="wrapper">			
+		<%= yield %>
+		</div>
+	</div>
+</div>
+<div class="slboard_overlay" id="overlay"></div>
+<%= render :partial => 'layouts/footer' %>
+<%= javascript_include_tag @script %>
+</body>
+</html>

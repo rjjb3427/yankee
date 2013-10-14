@@ -1,0 +1,17 @@
+<%= form_for @editor_photo,:url=>{:action=>'create',:format=>'text'},:html=> {:multipart => true,:id=>'editor_upimage',:name=>'editor_upimage',:onSubmit=>'return false'}  do |f| %>
+  <% if @editor_photo.errors.any? %>
+  <div id="error_explanation">
+  	<h2><%= pluralize(@editor_photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+  	<ul>
+  		<% @editor_photo.errors.full_messages.each do |msg| %>
+  		<li><%= msg %></li>
+      <% end %>
+		</ul>
+	</div>
+  <% end %>
+  <div id="pop_content2" class="field">
+    <%= f.label :photo,'사진'  %><br />  	
+    <%= f.file_field :photo,:class=>"upload",:id=>"uploadInputBox" %>
+    <p class="dsc" id="info"><strong>10MB</strong>이하의 이미지 파일만 등록할 수 있습니다.<br>(JPG, GIF, PNG, BMP)</p>    
+  </div>
+<% end %>
