@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-User.create!(:email => 'toughjjh@gmail.com',:name=>'잠자는-사자',:password => '123456', :password_confirmation => '123456',:description=>'살인자 은행 망해라!!',:admin=>1)
+User.create!(:email => 'toughjjh@gmail.com',:name=>'잠자는-사자',:password => 'jjh123456', :password_confirmation => 'jjh123456',:description=>'살인자 은행 망해라!!',:admin=>1)
 
 Notice.create!(:id=>1,:user_id=>1,:title=>'예쁘고 귀여운 수정이의 집이 다시 개장했습니다.')
 NoticeContent.create!(:id=>1,:content=>'그동안 수많은 방문자에 비해서 준비되지 못하였는데 이제 보다 업그레이드된 모습으로 다시 찾아뵙게되었습니다.

@@ -46,7 +46,7 @@ class ImproveController < ApplicationController
 
     respond_to do |format|
       if @improve.save
-        format.html { redirect_to @improve, notice: '제안이 접수되었습니다.' }
+        format.html { redirect_to @improve, :notice=> @controller_name +t(:message_success_insert)}
         format.json { render json: @improve, status: :created, location: @improve }
       else
         format.html { render action: "new" }
@@ -62,7 +62,7 @@ class ImproveController < ApplicationController
 
     respond_to do |format|
       if @improve.update_attributes(params[:improve])
-        format.html { redirect_to @improve, notice: 'Improve was successfully updated.' }
+        format.html { redirect_to @improve, :notice=> @controller_name +t(:message_success_update)}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

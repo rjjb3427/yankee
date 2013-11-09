@@ -69,7 +69,7 @@ class FaqsController < ApplicationController
 
         respond_to do |format|
             if @faq.save
-                format.html { redirect_to faqs_url, notice: 'Faq was successfully created.' }
+                format.html { redirect_to faqs_url, :notice=> @controller_name +t(:message_success_insert)}
                 format.json { render json: @faq, status: :created, location: @faq }
             else
                 format.html { render action: "new" }
@@ -85,7 +85,7 @@ class FaqsController < ApplicationController
 
         respond_to do |format|
             if @faq.update_attributes(params[:faq])
-                format.html { redirect_to @faq, notice: 'Faq was successfully updated.' }
+                format.html { redirect_to @faq, :notice=> @controller_name +t(:message_success_update)}
                 format.json { head :ok }
             else
                 format.html { render action: "edit" }

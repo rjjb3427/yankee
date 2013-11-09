@@ -72,7 +72,7 @@ class GalleriesController < ApplicationController
 
         respond_to do |format|
             if @gallery.save
-                format.html { redirect_to galleries_url, :notice => '갤러리 사진이 등록되었습니다.' }
+                format.html { redirect_to galleries_url, :notice=> @controller_name +t(:message_success_insert)}
                 format.json { render :json => @gallery, :status => :created, :location => @gallery }
             else
                 format.html { render :action => "new" }
@@ -88,7 +88,7 @@ class GalleriesController < ApplicationController
 
         respond_to do |format|
             if @gallery.update_attributes(params[:gallery])
-                format.html { redirect_to @gallery, :notice => '갤러리 사진이 수정되었습니다.' }
+                format.html { redirect_to @gallery, :notice=> @controller_name +t(:message_success_update)}
                 format.json { head :ok }
             else
                 format.html { render :action => "edit" }

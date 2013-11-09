@@ -46,7 +46,7 @@ class FaqCategoriesController < ApplicationController
 
     respond_to do |format|
       if @faq_category.save
-        format.html { redirect_to @faq_category, notice: 'Faq category was successfully created.' }
+        format.html { redirect_to @faq_category, :notice=> @controller_name +t(:message_success_insert)}
         format.json { render json: @faq_category, status: :created, location: @faq_category }
       else
         format.html { render action: "new" }
@@ -62,7 +62,7 @@ class FaqCategoriesController < ApplicationController
 
     respond_to do |format|
       if @faq_category.update_attributes(params[:faq_category])
-        format.html { redirect_to @faq_category, notice: 'Faq category was successfully updated.' }
+        format.html { redirect_to @faq_category, :notice=> @controller_name +t(:message_success_update)}
         format.json { head :ok }
       else
         format.html { render action: "edit" }

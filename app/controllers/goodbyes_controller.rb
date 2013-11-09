@@ -44,7 +44,7 @@ class GoodbyesController < ApplicationController
 
     respond_to do |format|
       if @goodbye.save
-        format.html { redirect_to @goodbye, notice: 'Goodbye was successfully created.' }
+        format.html { redirect_to @goodbye, :notice=> @controller_name +t(:message_success_insert)}
         format.json { render json: @goodbye, status: :created, location: @goodbye }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class GoodbyesController < ApplicationController
 
     respond_to do |format|
       if @goodbye.update_attributes(params[:goodbye])
-        format.html { redirect_to @goodbye, notice: 'Goodbye was successfully updated.' }
+        format.html { redirect_to @goodbye, :notice=> @controller_name +t(:message_success_update)}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
