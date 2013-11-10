@@ -1,7 +1,7 @@
-<section id="faq_main" class="sub_main">
-	<div class="section_top">
-		<h2><%=@board_name %></h2>
-	</div>
+<% if notice %>
+<%= render :partial => 'layouts/notice',:locals=>{:notice=>notice} %>
+<% end %>
+<section id="faq_index">
 	<%= render :partial => 'layouts/ad' %>	
 	<article>
 		<ol id="faqCategoryList">

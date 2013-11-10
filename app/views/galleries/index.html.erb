@@ -1,8 +1,4 @@
 <section id="gallery_main" class="sub_main">
-	<div class="section_top">
-		<h2><%=@board_name %></h2>
-		<p class="path"><%=link_to '홈으로',root_path,:title=>'홈으로' %>  &gt; <strong><%=@board_name %></strong></p>		
-	</div>
 	<p id="notice"><%= notice %></p>
 	<ol class="category_list">
 		<% if(@gallery_categories.length>0) %>			
@@ -45,7 +41,7 @@
 				</div>
 			<% else %>
 			<ul>
-				<li>글이 없습니다</li>
+				<li><%=t(:no_data)%></li>
 			</ul>
 			<% end %>
 			</div>

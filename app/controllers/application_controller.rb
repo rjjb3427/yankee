@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   
   def initialize(*params)
     super(*params)
-    @title='살인자 은행이 망하는 그날까지!!'
+    @title='양키군인 한명도 없는 그날까지!!'
     @meta_robot='all, index, follow'
-    @meta_application_name='anti-kb 홈페이지'
-    @meta_description='anti-kb 홈페이지입니다.'
-    @meta_keyword='kb,KB,국민은행,금융,은행,대출,신용,신용대출,담보,사채,카드,카드론,이자,안티,급전,anti,살인자은행,antikb,이승기,김연아'
+    @meta_application_name='주한미군 철수 홈페이지'
+    @meta_description='주한미군 철수 홈페이지입니다.'
+    @meta_keyword='미군,미군범죄,소파,SOFA,미군철수,북한,무기,분단,전쟁,군대,주둔,주둔비,분담,양키,Yankee'
     @style='application'
     @script='index'
   end

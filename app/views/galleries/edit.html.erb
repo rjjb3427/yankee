@@ -1,8 +1,5 @@
-<div id="gallery_new" class="sub_main">
-	<div class="section_top">
-		<h2><%=@board_name %></h2>
-		<p class="path"><%=link_to '홈으로',root_path,:title=>'홈으로' %>  &gt; <strong><%=@board_name %></strong></p>
-	</div>	
+<div id="gallery_edit">
 	<%= render 'form' %>
-	<%= link_to '목록으로', galleries_path %>
+	<%= link_to t(:link_show), @galleries %> |
+	<%= link_to t(:link_list), galleries_path %>
 </div>

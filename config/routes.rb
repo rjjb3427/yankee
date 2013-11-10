@@ -9,7 +9,9 @@ Yankee::Application.routes.draw do
   resources :faq_categories  
   resources :faqs
   resources :improve
-  resources :usarmy  
+  resources :intro
+  resources :galleries
+  resources :usarmy
   
   namespace :admins do
     resources :intro, :menus, :notices, :gallery_categories, :galleries, :faq_categories,:faqs, :guest_books

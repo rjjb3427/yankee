@@ -1,6 +1,37 @@
 <section id="main_main">
 	<section class="section_main1">
-		
+		<h1>평화로운 한반도를 끊임없는 전쟁의 구렁텅이로 몰아넣는 미군 철수!!<h1>
+	</section>	
+	<section class="section_main1">
+		<h1>평화로운 한반도를 끊임없는 전쟁의 구렁텅이로 몰아넣는 미군 철수!!<h1>
+	</section>
+	<section class="section_main1">
+		<h1>평화로운 한반도를 끊임없는 전쟁의 구렁텅이로 몰아넣는 미군 철수!!<h1>
+	</section>
+	<section>
+		<article id="main_gallery">
+			<h3>사진첩</h3>
+			<a class="prev browse left hidden-phone"></a>
+			<div class="scrollable">
+				<% if @galleries.length>0 %>
+				<div class="items">
+					<% @galleries.each_slice(6) do |gallery| %>
+					<ul class="item">
+						<% gallery.each_with_index do |gallery,index| %>
+						<li><%=link_to image_tag(gallery.photo.medium_thumb),galleries_path(:gallery_category_id=>gallery.gallery_category_id,:id=>gallery) %></li>
+						<% end %>
+					</ul>
+				<% end %>
+				</div>
+			<% else %>
+			<ul>
+				<li>글이 없습니다</li>
+			</ul>
+			<% end %>
+			</div>
+			<a class="next browse right hidden-phone"></a>
+			<%=link_to 'more',galleries_path,:class=>'more' %>		
+		</article>
 	</section>
 	<%=render :partial => 'layouts/ad' %>	
 </section>
