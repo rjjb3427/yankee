@@ -33,7 +33,7 @@ gem 'bootstrap-sass','~> 2.3.2.1'
 gem 'fog'
 gem 'unf'
 gem 'recaptcha'
-gem 'capistrano'
+gem 'capistrano', '~> 2.15'
 gem 'protected_attributes'
 
 group :doc do
