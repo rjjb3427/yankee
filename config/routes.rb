@@ -8,21 +8,10 @@ Yankee::Application.routes.draw do
   resources :goodbyes  
   resources :faq_categories  
   resources :faqs
-  resources :improve
-  resources :intro
+  resources :intro, :improve, :sitemap 
   resources :galleries
   resources :usarmy
-  
-  namespace :admins do
-    resources :intro, :menus, :notices, :gallery_categories, :galleries, :faq_categories,:faqs, :guest_books
-    resources :questions do
-      resources :question_answers
-    end
-    
-    resources :recipes do
-      resources :recipe_comments
-    end      
-  end  
+  resources :questions
   
   root :to => 'home#index'
 end

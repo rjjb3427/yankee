@@ -1,0 +1,39 @@
+<%= form_for @question,:html=>{:class=>'slboard_form'} do |f| %>
+	<% if @question.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@question.errors.count, "error") %> prohibited this notice from being saved:</h2>
+		<ul>
+			<% @question.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<% unless user_signed_in? %>	
+	<div class="field">
+		<%= f.label :name %><br class="none" />
+		<%= f.text_field :name,:required=>'required' %>
+	</div>
+	<div class="field">
+		<%= f.label :password %><br class="none" />
+		<%= f.password_field :password,:required=>'required' %>
+	</div>	
+	<% end %>	
+	<div class="field">
+		<%= f.label :title %><br class="none" />
+		<%= f.text_field :title,:required=>'required' %>
+	</div>
+	<div class="field">
+		<%= f.label :secret %><br class="none" />
+		<%= f.check_box :secret %>
+	</div>	
+	<%= f.fields_for :question_content do |c| %>
+	<div class="field">
+		<%= c.label :content %><br class="none" />
+		<%= c.text_area :content,:required=>'required'  %>
+	</div>
+	<% end %>
+	<div class="actions">
+		<%= f.submit :class=>'btn btn-primary' %>
+	</div>
+<% end %>

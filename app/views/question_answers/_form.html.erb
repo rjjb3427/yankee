@@ -1,0 +1,19 @@
+<%= form_for([@question, @question_answers.build]) do |f| %>
+	<% unless user_signed_in? %>
+	<div class="field">
+		<%= f.label :name %><br class="none" />
+		<%= f.text_field :name,:required=>'required' %>
+ 	</div>
+ 	<div class="field">
+ 		<%= f.label :password %><br class="none" />
+ 		<%= f.password_field :password,:required=>'required' %>
+ 	</div>
+ 	<% end %>
+ 	<div class="field">
+ 		<%= f.label :content %><br class="none" />
+ 		<%= f.text_area :content,:required=>'required' %>
+ 	</div>
+ 	<div class="actions">
+ 		<%= f.submit %>
+ 	</div>
+<% end %>

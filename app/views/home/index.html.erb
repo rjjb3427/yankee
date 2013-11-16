@@ -13,7 +13,7 @@
 			<h3>사진첩</h3>
 			<a class="prev browse left hidden-phone"></a>
 			<div class="scrollable">
-				<% if @galleries.length>0 %>
+				<% unless @galleries.empty? %>
 				<div class="items">
 					<% @galleries.each_slice(6) do |gallery| %>
 					<ul class="item">
@@ -25,7 +25,7 @@
 				</div>
 			<% else %>
 			<ul>
-				<li>글이 없습니다</li>
+				<li><%=t(:no_data)%></li>
 			</ul>
 			<% end %>
 			</div>

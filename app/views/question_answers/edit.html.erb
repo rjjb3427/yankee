@@ -1,0 +1,22 @@
+<section id="quesetion_answer_edit" class="sub_main">
+	<%= form_for([@question, @question_answer]) do |f| %>
+	<% unless user_signed_in? %>
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name,:required=>'required' %>
+ 	</div>
+ 	<div class="field">
+ 		<%= f.label :password,'비밀번호(바꿀경우만 입력)' %><br />
+ 		<%= f.password_field :password,{:class=>'sl_input'} %>
+ 	</div>
+ 	<% end %>
+ 	<div class="field">
+ 		<%= f.label :content %><br />
+ 		<%= f.text_area :content,:required=>'required' %>
+ 	</div>
+ 	<div class="actions">
+ 		<%= f.submit %>
+ 	</div>
+	<% end %>
+	<%= link_to '목록으로', question_path(@question) %>
+</section>

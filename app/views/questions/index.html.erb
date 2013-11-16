@@ -1,0 +1,42 @@
+<section id="question_index">
+	<%= render :partial => 'layouts/ad' %>	
+	<table width="100%" cellpadding="0" cellspacing="0" class="slboard_list">
+		<colgroup>
+			<col width="100px" />
+			<col />
+			<col width="70px" />			
+			<col width="70px" />
+			<col width="130px" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th><p class="sl_name">이름</p></th>
+				<th><p class="sl_title">제목</p></th>
+				<th class="sl_right"><p class="sl_count">답변</p></th>				
+				<th class="sl_right"><p class="sl_count">조회</p></th>
+				<th class="sl_right"><p class="sl_registered_date">등록일</p></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% unless @questions.empty? %>
+			<% @questions.each do |question| %>
+			<tr>
+				<td><p class="sl_name" title="<%=userName(question) %>"><%=userName(question,10) %></p></td>
+				<td><p><%=checkPrivLink(question) %> &nbsp; <% if(question.secret?) %><%=image_tag('/assets/board/lock.png') %><% end %></p></td>
+				<td class="sl_right"><p class="sl_count"><% if question.question_answers_count? %>답변<% else %>미답변<% end %></p></td>
+				<td class="sl_right"><p class="sl_count"></p></td>
+				<td class="sl_right"><p class="sl_registered_date"><%=question.created_at.to_date %></p></td>
+			</tr>
+			<% end %>			
+			<% else %>
+			<tr>
+				<td colspan="5"><p><%=t(:no_data) %></p></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div id="sl_bottom_menu">
+		<%= link_to '글쓰기', new_question_path %>
+		<div class="flickr_pagination"><%= paginate @questions %></div>
+	</div>
+</section>
