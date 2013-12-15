@@ -38,6 +38,7 @@ gem 'recaptcha'
 gem 'capistrano'
 gem 'thin'
 gem 'connect'
+gem 'impressionist'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -49,11 +50,7 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-
 group :production do
   gem 'mysql2'
-end
-
-group :assets do
   gem 'asset_sync'
 end
