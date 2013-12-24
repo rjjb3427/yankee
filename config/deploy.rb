@@ -1,4 +1,4 @@
-set :application, 'yankee'
+set :application, 'soojung'
 set :repo_url, 'git@github.com:sleeping-lion/yankee.git'
 set :branch, 'master'
 set :deploy_to, '/home/deploy/yankee'
