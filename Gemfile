@@ -26,7 +26,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'devise'
+gem 'devise', '~> 3.0.0.rc'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
