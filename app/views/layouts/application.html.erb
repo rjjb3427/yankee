@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>많이 있었다 아이가? 이제 제발좀 꺼져줘 |  www.soojung.kr</title>
-<meta charset="utf-8">	
-<meta name="robots" content="all, index, follow" />
-<meta name="application-name" content="예쁘고 귀여운 수정이의 홈페이지" />
-<meta name="keywords" content="수정,인수정,수정이,soojung,crystal,정종호,요리,레시피,애교,애완동물,짬순이,멍군이,말티즈,비봉고등학교,수원고등학교" />
-<meta name="description" content="예쁘고 귀여운 수정이의 홈페이지입니다." />
+<title><%=@title %></title>
+<meta charset="utf-8">
+<meta name="robots" content="<%=@meta_robot %>" />
+<meta name="application-name" content="<%=@meta_application_name %>" />
+<meta name="keywords" content="<%=@meta_keyword %>" />
+<meta name="description" content="<%=@meta_description %>" />
 <meta name="author" content="Sleeping-Lion" />
-<link rel="shortcut icon" href="/assets/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="shortcut icon" href="<%=asset_path('favicon.ico') %>" />
+<%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", :media => "all" %>
 <%= stylesheet_link_tag @style, :media => "all" %>
 <%= csrf_meta_tags %>
 </head>
@@ -17,28 +20,40 @@
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <%= render :partial => 'layouts/header' %>
-<div id="mom">
-	<div id="main">
-			<section class="sub_main">
-				<% unless current_page?(root_path) %>
-				<div class="page-header pull-left row-fluid">
-					<h1 class="pull-left"><%=@controller_name %></h1>
-					<ul class="breadcrumb pull-right">
-						<li><%=link_to_home %> <span class="divider">/</span></li>
-						<% if @page_category %>
-						<li><%=link_to @page_category %> <span class="divider">/</span></li>
-						<% end %>
-						<li class="active"><%=@controller_name %></li>
-					</ul>
-				</div>
-				<% end %>
-			<%=yield %>
-		<div class="clearfix">&nbsp;</div>
+<section id="mom">
+	<section id="main" class="container">
+		<section class="sub_main">
+			<% unless current_page?(root_path) %>
+			<div class="page-header pull-left row-fluid">
+				<h1 class="pull-left"><%=@controller_name %></h1>
+				<ul class="breadcrumb pull-right">
+					<li><%=link_to t(:home),root_path %></li>
+					<% if @page_category %>
+					<li><%=link_to @page_category %></li>
+					<% end %>
+					<li class="active"><%=@controller_name %></li>
+				</ul>
+			</div>
+			<% end %>
+	<% unless	@menu_setting.nil? %>
+	<% if @ad && @menu_setting.ad_position_id==2 %>
+	<%= render :partial => 'layouts/ad' %>
+	<% end %>
+	<% end %>
+				<%=yield %>
+	<% unless	@menu_setting.nil? %>				
+	<% if @ad && @menu_setting.ad_position_id==3 %>
+	<%= render :partial => 'layouts/ad' %>
+	<% end %>
+	<% end %>
+			<div class="clearfix">&nbsp;</div>
 		</section>
-	</div>
-</div>
+	</section>
+</section>
 <%= render :partial => 'layouts/footer' %>
 <div class="slboard_overlay" id="overlay"></div>
+<%= javascript_include_tag "//cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" %>
+<%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" %>
 <%= javascript_include_tag @script %>
 </body>
 </html>
