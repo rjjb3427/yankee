@@ -1,17 +1,67 @@
-Yankee::Application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'  
-  
-  devise_for :users,:controllers => { :sessions => "users/sessions",:registrations => "users/registrations" }, :path_names =>  {:sign_up=>'new',:sign_in => 'login', :sign_out => 'logout'} do  
-    get 'login', :to => 'users::Sessions#new'
-  end
+Yankee::Application.routes.draw do  
+  root 'home#index'
+  mount Ckeditor::Engine => '/ckeditor'
 
-  resources :goodbyes  
-  resources :faq_categories  
-  resources :faqs
-  resources :intro, :improve, :sitemap 
-  resources :galleries
-  resources :usarmy
-  resources :questions
+  devise_for :users, :controllers => { :sessions => "users/sessions",:registrations => "users/registrations" }, :path_names =>  {:sign_up=>'new',:sign_in => 'login', :sign_out => 'logout'} do
+    get '/users', :to => 'users/registrations#index'
+    get '/login', :to => 'users/sessions#new'      
+  end
   
-  root :to => 'home#index'
+  resources :intro,:gallery_categories, :galleries, :faq_categories,:faqs, :notices, :site, :intro, :contacts, :notices, :histories, :portfolios  
+  resources :intro, :improve, :sitemap 
+  resources :usarmy    
+  resources :goodbyes      
+    
+  resources :blogs do
+    resources :blog_comments
+  end
+  
+  resources :questions do
+    get 'password',:on=>:collection
+    post 'password',:on=>:collection    
+    resources :question_comments
+  end
+  
+  resources :guest_books do
+    resources :guest_book_comments do
+      get 'password',:on=>:collection
+      post 'password',:on=>:collection      
+    end
+  end
+  
+  get 'home/popup'=>'home#popup'  
+  
+  get 'blogs/:blog_id/blog_comments/:id/password',:to=>'blog_comments#password'
+  post 'blogs/:blog_id/blog_comments/:id/password',:to=>'blog_comments#password'
+  
+  get 'guest_books/:guest_book_id/guest_book_comments/:id/password',:to=>'guest_book_comments#password'
+  post 'guest_books/:guest_book_id/guest_book_comments/:id/password',:to=>'guest_book_comments#password'  
+  
+  # admin 
+  get '/admin', :to=>'admin/home#index'
+  
+  namespace :admin do
+    resources :resources
+    resources :intro,:gallery_categories, :galleries, :faq_categories,:faqs, :notices, :site, :intro, :contacts, :notices, :histories, :portfolios
+    resources :questions do
+      resources :question_comments
+    end
+    
+    resources :blogs do
+      resources :blog_comments
+    end
+    
+    resources :questions do
+      get 'password',:on=>:collection
+      post 'password',:on=>:collection    
+      resources :question_comments
+    end
+  
+    resources :guest_books do
+      resources :guest_book_comments do
+        get 'password',:on=>:collection
+        post 'password',:on=>:collection      
+      end
+    end    
+  end  
 end

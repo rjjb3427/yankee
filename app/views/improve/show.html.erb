@@ -1,4 +1,7 @@
+<% if notice %>
+<%= render :partial => 'layouts/notice',:locals=>{:notice=>notice} %>
+<% end %>
 <section>
-	<p id="notice"><%= notice %></p>
+	
 </section>
 

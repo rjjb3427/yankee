@@ -6,7 +6,12 @@ class Admin::AdminController < ApplicationController
   
   def initialize(*params)
     super(*params)
+    
     @style='admin/index'
-    @script='admin/index'
+    @script='notices'
   end
+  
+  def set_resource 
+    @resources = Resource.order([:priority,:id])
+  end  
 end

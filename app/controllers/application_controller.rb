@@ -1,19 +1,32 @@
 # encoding: utf-8
 
-class ApplicationController < ActionController::Base  
+class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  layout :layout
-  before_filter :set_locale
+  layout :layout  
+  before_action :set_locale
+  before_action :set_resource  
+  before_action :set_ad, only: [:index, :show]
   
   def initialize(*params)
     super(*params)
-    @title='양키군인 한명도 없는 그날까지!!'
+    
+    @title=t(:application_name)
+    
+    @application_name=t(:application_name)
+    @controller_name=t(:application_name)
+    
     @meta_robot='all, index, follow'
-    @meta_application_name='주한미군 철수 홈페이지'
-    @meta_description='주한미군 철수 홈페이지입니다.'
-    @meta_keyword='미군,미군범죄,소파,SOFA,미군철수,북한,무기,분단,전쟁,군대,주둔,주둔비,분담,양키,Yankee'
+    @meta_description=t(:meta_description)
+    @meta_keyword=t(:meta_keyword)
+           
     @style='application'
-    @script='index'
+    @script='application'
+    
+    @menu_setting=nil
+  end
+  
+  def set_resource 
+    @resources = Resource.where(:enable=>true).where(:menu_display=>true).order([:priority,:id])
   end
   
   def set_locale
@@ -21,10 +34,20 @@ class ApplicationController < ActionController::Base
   end
   
   def layout
-    if(params[:no_layout])
-      return nil
+    if params[:no_layout]
+      return false
     else
       return 'application'
     end
   end  
+  
+  protected
+  
+  def set_ad 
+    @ad=true
+  end
+  
+  def get_menu(menu)
+    @menu_setting=Resource.where(:controller=>menu).first
+  end
 end

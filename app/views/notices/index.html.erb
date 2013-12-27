@@ -1,5 +1,5 @@
-<section id="notice_index">
-	<table width="100%" cellpadding="0" cellspacing="0" class="slboard_list">
+<section id="sl_notice_index" class="table-responsive">	
+	<table width="100%" cellpadding="0" cellspacing="0" class="table slboard_list">
 		<colgroup>
 			<col width="100px" />
 			<col />
@@ -8,10 +8,10 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th><p class="sl_name">이름</p></th>
-				<th><p class="sl_title">제목</p></th>
-				<th class="sl_right"><p class="sl_count">조회</p></th>
-				<th class="sl_right"><p class="sl_registered_date">등록일</p></th>
+				<th><p class="sl_name"><%=t(:label_name) %></p></th>
+				<th><p class="sl_title"><%=t(:label_title) %></p></th>
+				<th class="sl_right"><p class="sl_count"><%=t(:label_count) %></p></th>
+				<th class="sl_right"><p class="sl_registered_date"><%=t(:label_created_at) %></p></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +26,7 @@
 			<tr>
 				<td><p class="sl_name"><%= notice.user.name %></p></td>
 				<td><p><%= link_to notice.title, notice  %></p></td>
-				<td class="sl_right"><p class="sl_count"></p></td>
+				<td class="sl_right"><p class="sl_count"><%=notice.impressionist_count(:filter=>:ip_address) %></p></td>
 				<td class="sl_right"><p class="sl_registered_date"><%=notice.created_at.to_date %></p></td>
 			</tr>
 			<% end %>
@@ -40,11 +40,9 @@
 	<div id="sl_bottom_menu">
 	<% if user_signed_in? %>
 	<% if current_user.admin? %>			
-		<%= link_to '글쓰기', new_notice_path %>
+		<%= link_to t(:link_new), new_notice_path %>
 	<% end %>
 	<% end %>
-		<div class="flickr_pagination">
-			<%= paginate @notices %>
-  		</div>
+	<%= paginate @notices %>
 	</div>
 </section>

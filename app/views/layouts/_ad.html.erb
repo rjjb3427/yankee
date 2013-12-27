@@ -2,7 +2,7 @@
 <% if Rails.env.production? %>
 <script type="text/javascript">
 <!--
-adUnit = document.getElementById("top_ad");
+adUnit = document.getElementById("sl_ad");
 adWidth = adUnit.offsetWidth;
  
 /* Replace this with your AdSense Publisher ID */
@@ -38,22 +38,28 @@ google_ad_height = 280;
 <div id="ad_test" class="ad_test">&nbsp;</div>
 <script type="text/javascript">
 <!--
-adUnit = document.getElementById("top_ad");
+adUnit = document.getElementById("sl_ad");
 adTest = document.getElementById("ad_test");
 adWidth = adUnit.offsetWidth;
 
-if ( adWidth >= 768 ) {
+if(adWidth >= 940) {
+/* 160x600, 작성됨 09. 6. 21 */
+adTest.style.width = '160px';
+adTest.style.height = '600px';
+adTest.style.cssFloat = 'right';
+
+} else if ( adWidth >= 728 ) {
 /* Leaderboard 728x90 */
-adTest = 728;
-adTest = 90;
+adTest.style.width = '728px';
+adTest.style.height = '90px';
 } else if ( adWidth >= 468 ) {
 /* Banner (468 x 60) */
-adTest = 468;
-adTest = 60;
+adTest.style.width = '468px';
+adTest.style.height = '60px';
 } else if ( adWidth >= 336 ) {
 /* Large Rectangle (336 x 280) */
-adTest = 336;
-adTest = 60;
+adTest.style.width = '336px';
+adTest.style.height = '280px';
 }
 
 //-->

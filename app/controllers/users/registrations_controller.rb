@@ -1,4 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout :layout
+    
+  def initialize(*params)
+    super(*params)
+    @controller_name=t('activerecord.models.user')
+  end
+  
   def index
     @users = User.order('id desc').page(params[:page]).per(10)
     
@@ -18,16 +25,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
     
  # GET /resource/sign_up
-  def new
-    resource = build_resource({})
-    respond_with resource
-  end
+#  def new
+#    resource = build_resource({})
+#    respond_with resource
+#  end
 
   # POST /resource
   def create
-    build_resource
-
-    if resource.save
+    build_resource(resource_params)
+    
+    if Rails.env.production? 
+      result=verify_recaptcha(:model => resource) && resource.save
+    else 
+      result=resource.save
+    end
+    
+    if result
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)
@@ -57,5 +70,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # this method in your own RegistrationsController.
   def after_update_path_for(resource)
     signed_in_root_path(resource)
+  end
+  
+  def layout
+    if(params[:no_layout])
+      return nil
+    else
+      return 'application'
+    end
+  end
+  
+  protected
+  
+  def account_update_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :description, :photo, :photo_cache)
+  end  
+  
+  private
+
+  def resource_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :description, :photo, :photo_cache)
   end
 end

@@ -1,12 +1,20 @@
 <header>
- 	<h1><%= link_to 'Yankee Go Home!!!',root_path,:title=>"홈으로" %></h1>
+	<h1><%=link_to t(:home_title),root_path %></h1>	
+	<% if user_signed_in? %>			
+	<ul id="top_menu">	
+		<li><%=link_to current_user.name,edit_user_registration_path %><%=t(:welcome)%></li>
+		<li><%= link_to t(:logout),destroy_user_session_path %></li>
+	</ul>
+	<% end %>
 	<nav>
 		<ul>
-			<li><%= link_to '주한미군 바로 알기',usarmy_index_path,:title=>"주한미군 바로 알기" %></li>
-			<li><%= link_to '주한미군 활동 사진첩',galleries_path,:title=>'Faq' %></li>					
-			<li><%= link_to '주한미군 QnA',questions_path,:title=>'question' %></li>			
-			<li><%= link_to '주한미군 FAQ',faqs_path,:title=>'Faq' %></li>
-			<li><%= link_to '양키 돌려보낼방법',goodbyes_path,:title=>"주한미군을 보낼방법 쓰기" %></li>
+			<% unless @resources.empty? %>
+			<% @resources.each do |resource| %>
+			<li><%=link_to t('activerecord.models.'+resource.controller.singularize),'/'+resource.controller %></li>
+			<% end %>
+			<% else %>
+			<li><%=t(:no_data) %></li>
+			<% end %>
 		</ul>
 	</nav>
 </header>

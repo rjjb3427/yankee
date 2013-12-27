@@ -1,0 +1,38 @@
+<section id="sl_blog_index">
+	<% if @menu_setting.use_category %>	
+	<ol class="nav nav-tabs">
+		<% unless @blog_categories.empty? %>
+		<% @blog_categories.each do |blog_category| %>
+		<li <% if(@blog_category_id==blog_category.id) %>class="active"<% end %>><%= link_to blog_category.title.truncate(20),blogs_path(:blog_category_id=>blog_category.id) %></li>
+		<% end %>
+  	<% else %>	
+		<li><%=t(:no_data)%></li>
+		<% end %>
+	</ol>
+	<% end %>
+	<% unless @blogs.empty? %>
+	<% @blogs.each do |blog| %>
+	<div class="media">
+  	<%=link_to blog_path(blog),:class=>"pull-left" do %>
+  		<% if blog.photo %>
+    	<%=image_tag blog.photo.small_thumb, :class=>"media-object",:alt=>"..." %>
+    	<% end %>
+  	<% end %>
+  	<div class="media-body">
+    	<h4 class="media-heading"><%=link_to blog.title,blog_path(blog) %></h4>
+    	<p><%=link_to blog.description,blog_path(blog) %></p>    	
+  	</div>
+	</div>
+	<% end %>
+	<% else %>
+	<%=t(:no_data) %>
+	<% end %>
+	<div id="sl_bottom_menu">
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>			
+		<%= link_to t(:link_new), new_blog_path %>
+	<% end %>
+	<% end %>
+	<%= paginate @blogs %>
+	</div>
+</section>

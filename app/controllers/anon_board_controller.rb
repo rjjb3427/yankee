@@ -1,12 +1,18 @@
 # encoding: utf-8
 
-class AnonBoardController < BoardController
-  before_filter :check_edit_password, :only => [:edit]
-  before_filter :check_destroy_password, :only => [:destroy]
-  before_filter :check_confirm, :only => [:destroy]
+class AnonBoardController < ApplicationController
+  before_action :check_edit_password, :only => [:edit]
+  before_action :check_destroy_password, :only => [:destroy]
+  before_action :check_confirm, :only => [:destroy]
+  
+  def initialize(*params)
+    super(*params)
+    @script="board/index"
+    @controller_name='게시판'
+  end  
   
   def confirm_delete
-    gg=self.password_fail
+    gg=self.get_gg
     gid=gg.id
     @gid=gid
     gname=gg.class.name
@@ -26,7 +32,7 @@ class AnonBoardController < BoardController
   end
   
   def password_fail
-    self.edit
+    self.get_gg
   end
   
   def password
@@ -40,7 +46,7 @@ class AnonBoardController < BoardController
   protected
   
   def _privileges
-    gg=self.password_fail
+    gg=self.get_gg
     @gname=gg.class.name 
     @gid=gg.id
     
@@ -91,8 +97,8 @@ class AnonBoardController < BoardController
       session[gname][:guest_pass_fail]={}
       session[gname][:guest_pass_fail][gid]=0
     end
-    
-    if(params[:password])
+
+    if params[:password]
       if gg.authenticate(params[:password])    
         session[gname][:guest_pass_id]<<gid
         redirect_to(:action=>next_action,:id=>gid)
@@ -104,7 +110,6 @@ class AnonBoardController < BoardController
       flash.now[:notice]='비밀번호를 입력해주세요.'
     end
   end
-  
   
   def check_confirm 
     if self.privileges?

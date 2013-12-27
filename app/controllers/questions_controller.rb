@@ -2,18 +2,20 @@
 
 class QuestionsController < AnonBoardController
   include SecretBoard
-  before_filter :check_secret, :only => [:show]
+  before_action :check_secret, :only => [:show]  
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
   
   def initialize(*params)
     super(*params)
-    @meta_description='예쁘고 귀여운 수정이의 질문,답변 게시판입니다.'    
-    @controller_name='수정이에게 질문'
-  end  
+    @controller_name=t('activerecord.models.question')
+    
+    get_menu('questions')    
+  end
   
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.order('id desc').page(params[:page]).per(10)
+    @questions = Question.order(@menu_setting.order).page(params[:page]).per(@menu_setting.per)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -24,8 +26,10 @@ class QuestionsController < AnonBoardController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question = Question.find(params[:id])
-    @question_answers=@question.question_answer.order('id desc').page(params[:page]).per(10)
+    @question_comments=@question.question_comment.order('id desc').page(params[:page]).per(10)
+    @question_comment=QuestionComment.new
+    
+    @script="board/show"    
     
     respond_to do |format|
       format.html # show.html.erb
@@ -48,24 +52,29 @@ class QuestionsController < AnonBoardController
   
   # GET /questions/1/edit
   def edit
-    @question = Question.find(params[:id])
   end
   
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(params[:question])
+    @question = Question.new(question_params)
     
     if current_user
       @question.user_id=current_user.id
     end 
     
     respond_to do |format|
-      if @question.save
+      if Rails.env.production? 
+        result=verify_recaptcha(:model => @question, :message => "Oh! It's error with reCAPTCHA!") && @question.save
+      else 
+        result=@question.save
+      end
+      
+      if result
         session[@question.class.name]||={} 
         session[@question.class.name][:guest_pass_id]||=[]
         session[@question.class.name][:guest_pass_id]<<@question.id
-        format.html { redirect_to @question, :notice=> @controller_name +t(:message_success_insert)}
+        format.html { redirect_to @question, :notice=> @controller_name +t(:message_success_create)}
         format.json { render :json => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }
@@ -77,10 +86,8 @@ class QuestionsController < AnonBoardController
   # PUT /questions/1
   # PUT /questions/1.json
   def update
-    @question = Question.find(params[:id])
-    
     respond_to do |format|
-      if @question.update_attributes(params[:question])
+      if @question.update_attributes(question_params)
         format.html { redirect_to @question, :notice=> @controller_name +t(:message_success_update)}
         format.json { head :ok }
       else
@@ -93,12 +100,26 @@ class QuestionsController < AnonBoardController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
     
     respond_to do |format|
       format.html { redirect_to questions_url }
       format.json { head :ok }
     end
+  end
+  
+  def get_gg 
+    return set_question
+  end
+  
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question
+    @question = Question.find(params[:id])
+  end
+  
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def question_params
+    params.require(:question).permit(:id,:title,:name,:password,question_content_attributes: [:id,:content],question_answer_attributes: [:id,:content])
   end
 end

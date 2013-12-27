@@ -4,6 +4,7 @@ class Admin::IntroController < Admin::AdminController
   # GET /menus
   # GET /menus.json
   def index
+    @admin_intro = Intro.order('id desc').page(params[:page]).per(10)
     
     respond_to do |format|
       format.html # index.html.erb

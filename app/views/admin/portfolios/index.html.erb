@@ -1,0 +1,31 @@
+<section id="sl_portfolio_index" class="">
+	<% @portfolios.each do |portfolio| %>
+	<article class="media">
+		<%=link_to portfolio.url,{:target=>'_blank',:class=>"pull-left"} do %>
+		<figure class="image">
+			<%= image_tag(portfolio.photo.medium_thumb) %>
+		</figure>
+		<% end %>
+    <div class="media-body">
+    <h4 class="media-heading"><%=link_to portfolio.title,portfolio.url,{:target=>'_blank'} %></h4>
+    <%=portfolio.description %>    
+    <%=link_to portfolio.url,portfolio.url,{:target=>'_blank'} %>
+    </div>
+		<% if user_signed_in? %>
+		<% if current_user.admin? %>
+			<%= link_to t(:link_edit), edit_portfolio_path(portfolio) %> &nbsp; | &nbsp; 
+			<%= link_to t(:link_delete), portfolio, method: :delete, data: { confirm: t(:delete_confirm)} %>
+		<% end %>
+		<% end %>    
+    </article>
+	<% end %>
+	<div id="sl_bottom_menu">
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>			
+		<%= link_to t(:link_new), new_portfolio_path %>
+	<% end %>
+	<% end %>
+	<%= paginate @portfolios %>
+	</div>
+</section>
+

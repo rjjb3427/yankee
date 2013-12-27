@@ -6,16 +6,12 @@ class AnonCommentController < AnonBoardController
     @controller_name='댓글'
   end
   
-  def password_fail
-    self.show
-  end
-  
   protected  
   
   def check_confirm 
     if self.privileges?
       return true
-    end          
+    end
     
     unless params[:confirm]
       redirect_to(:action=>'confirm_delete',:id=>@gid)

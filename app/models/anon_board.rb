@@ -2,6 +2,7 @@
 
 module AnonBoard
   def authenticate(password)
+    puts password 
     expected_password=self.make_encrypted_password(password,self.salt)
     if self.encrypted_password != expected_password
       return nil

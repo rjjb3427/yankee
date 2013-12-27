@@ -7,8 +7,6 @@ class UserUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   
   # Choose what kind of storage to use for this uploader:
-  #storage :file
-  #storage :fog
   
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -19,7 +17,7 @@ class UserUploader < CarrierWave::Uploader::Base
     end
     
     return upload_dir
-  end 
+  end
   
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
@@ -34,16 +32,16 @@ class UserUploader < CarrierWave::Uploader::Base
   end
   
   # Create different versions of your uploaded files:
-  version :small_thumb do
-    process :resize_to_fill => [50, 50]
-  end
-  
-  version :medium_thumb do
+  version :mini_thumb do
     process :resize_to_fill => [100, 100]
   end
   
-  version :large_thumb do
+  version :small_thumb do
     process :resize_to_fill => [200, 200]
+  end
+  
+  version :large_thumb do
+    process :resize_to_fill => [480, 0]
   end
   
   # Add a white list of extensions which are allowed to be uploaded.

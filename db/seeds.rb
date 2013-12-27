@@ -1,15 +1,65 @@
 # encoding: utf-8
 
-User.create!(:email => 'toughjjh@gmail.com',:name=>'잠자는-사자',:password => 'jjh123456', :password_confirmation => 'jjh123456',:description=>'살인자 은행 망해라!!',:admin=>1)
+User.create!(:email => 'toughjjh@gmail.com',:name=>'잠자는-사자',:password => 'jjh123456', :password_confirmation => 'jjh123456',:description=>'살인자 은행 망해라!!',:admin=>true)
+User.create!(:email => 'test_admin@gmail.com',:name=>'관리자 테스트',:password => '123456', :password_confirmation => '123456',:description=>'살인자 은행 망해라!!',:admin=>true)
+User.create!(:email => 'test_user@gmail.com',:name=>'사용자 테스트',:password => '123456', :password_confirmation => '123456',:description=>'살인자 은행 망해라!!',:admin=>false)
 
-Notice.create!(:id=>1,:user_id=>1,:title=>'예쁘고 귀여운 수정이의 집이 다시 개장했습니다.')
-NoticeContent.create!(:id=>1,:content=>'그동안 수많은 방문자에 비해서 준비되지 못하였는데 이제 보다 업그레이드된 모습으로 다시 찾아뵙게되었습니다.
-수정이와 소통하는 공간으로 계속 많은 이용바랍니다.')
+AdPosition.create!(:id=>1,:title=>'광고 표시안함',:position=>'none')
+AdPosition.create!(:id=>2,:title=>'위에 표시',:position=>'top')
+AdPosition.create!(:id=>3,:title=>'아래에 표시',:position=>'bottom')
+
+Resource.create!(:id=>1,:ad_position_id=>3,:title=>'메인',:menu_display=>false,:controller=>'home',:description=>'처음화면',:priority=>9000)
+Resource.create!(:id=>2,:ad_position_id=>3,:title=>'소개',:menu_display=>true,:controller=>'intro',:description=>'소개',:priority=>1000)
+Resource.create!(:id=>3,:ad_position_id=>2,:title=>'갤러리',:menu_display=>true,:controller=>'galleries',:use_category=>true,:description=>'갤러리',:priority=>2000)
+Resource.create!(:id=>4,:ad_position_id=>2,:title=>'블로그',:menu_display=>true,:controller=>'blogs',:use_category=>true,:description=>'블로그',:priority=>3000)
+Resource.create!(:id=>5,:ad_position_id=>2,:title=>'질문, 답변',:menu_display=>true,:controller=>'questions',:description=>'질문,답변',:priority=>4000)
+Resource.create!(:id=>6,:ad_position_id=>2,:title=>'FAQ',:menu_display=>true,:controller=>'faqs',:use_category=>true,:description=>'FAQ',:priority=>5000)
+Resource.create!(:id=>7,:ad_position_id=>2,:title=>'상담,문의',:menu_display=>true,:controller=>'contacts',:menu_action=>'new',:description=>'상담 문의를 받을수 있게 합니다.',:priority=>6000)
+Resource.create!(:id=>8,:ad_position_id=>1,:title=>'공지사항',:menu_display=>true,:controller=>'notices',:description=>'운영자가 방문자들에게 알릴 공지사항을 알릴수 있게 합니다.',:priority=>7000)
+Resource.create!(:id=>9,:ad_position_id=>2,:title=>'방명록',:menu_display=>true,:controller=>'guest_books',:description=>'방문자가 글을 쓸수 있는 방명록입니다.',:priority=>8000)
+Resource.create!(:id=>10,:ad_position_id=>2,:title=>'연혁',:menu_display=>true,:controller=>'histories',:description=>'연혁',:priority=>8000)
+Resource.create!(:id=>11,:ad_position_id=>2,:title=>'포트폴리오',:menu_display=>true,:controller=>'portfolios',:description=>'포트폴리오',:priority=>8000)
+Resource.create!(:id=>12,:ad_position_id=>2,:title=>'회원가입',:menu_display=>true,:controller=>'users',:menu_action=>'new',:description=>'사용자',:priority=>9000)
+
+BlogType.create(:title=>'일반형')
+BlogType.create(:title=>'게시판형')
+BlogType.create(:title=>'갤러리형') 
+
+BlogCategory.create(:id=>1,:blog_type_id=>1,:title=>'내소개')
+BlogCategory.create(:id=>2,:blog_type_id=>1,:title=>'리눅스')
+BlogCategory.create(:id=>3,:blog_type_id=>1,:title=>'웹개발')
+BlogCategory.create(:id=>4,:blog_type_id=>1,:title=>'제작작품')
+BlogCategory.create(:id=>5,:blog_type_id=>1,:title=>'방명록')
+BlogCategory.create(:id=>6,:blog_type_id=>1,:title=>'소개')
+BlogCategory.create(:id=>7,:blog_type_id=>1,:title=>'일기')
+BlogCategory.create(:id=>8,:blog_type_id=>1,:title=>'생각')
+BlogCategory.create(:id=>9,:blog_type_id=>1,:title=>'사진첩')
+BlogCategory.create(:id=>10,:blog_type_id=>1,:title=>'설치')
+BlogCategory.create(:id=>11,:blog_type_id=>1,:title=>'응용프로그램')
+BlogCategory.create(:id=>12,:blog_type_id=>1,:title=>'기본명령어')
+BlogCategory.create(:id=>13,:blog_type_id=>1,:title=>'서버')
+BlogCategory.create(:id=>14,:blog_type_id=>1,:title=>'html')
+BlogCategory.create(:id=>15,:blog_type_id=>1,:title=>'스타일시트')
+BlogCategory.create(:id=>16,:blog_type_id=>1,:title=>'자바스크립트')
+
+BlogCategoryRel.create(:blog_category_id=>1,:blog_category_rel_id=>6)
+BlogCategoryRel.create(:blog_category_id=>1,:blog_category_rel_id=>7)
+BlogCategoryRel.create(:blog_category_id=>1,:blog_category_rel_id=>8)
+BlogCategoryRel.create(:blog_category_id=>1,:blog_category_rel_id=>9)
+BlogCategoryRel.create(:blog_category_id=>2,:blog_category_rel_id=>10)
+BlogCategoryRel.create(:blog_category_id=>2,:blog_category_rel_id=>11)
+BlogCategoryRel.create(:blog_category_id=>2,:blog_category_rel_id=>12)
+BlogCategoryRel.create(:blog_category_id=>2,:blog_category_rel_id=>13)
+BlogCategoryRel.create(:blog_category_id=>3,:blog_category_rel_id=>14)
+BlogCategoryRel.create(:blog_category_id=>3,:blog_category_rel_id=>15)
+BlogCategoryRel.create(:blog_category_id=>3,:blog_category_rel_id=>16)
+
 
 GalleryCategory.create!(:title=>'수정이')
 GalleryCategory.create!(:title=>'종호')
 GalleryCategory.create!(:title=>'멍멍이')
-GalleryCategory.create!(:title=>'풍경')    
+GalleryCategory.create!(:title=>'풍경')        
+
 
 FaqCategory.create!(:id=>1,:title=>'주한미군')
 FaqCategory.create!(:id=>2,:title=>'주한미군')
@@ -29,3 +79,9 @@ FaqContent.create!(:id=>3,:content=>'중국견제의 핵심적 요충지 주둔,
 FaqContent.create!(:id=>4,:content=>'없습니다.') 
 FaqContent.create!(:id=>5,:content=>'북한,중국과의 관계개선 방해, 무기체계 독점으로 인한 고가구입, 미군주둔비용 부담, 미군주둔 토지 사용 못함, 미군범죄에의 노출로 민간인들 피해, 미군의 환경파괴로 인한 국토 오염 피해.')
 FaqContent.create!(:id=>6,:content=>'미국의 지배가 60년간 이어오면서 지배계층은 미국에의 비호를 받으며 자신들의 이익을 실현하고 있으며 이 상황유지를 위하여 언론을 통해 긴장을 조성하고 미군주둔의 정당성을 부여함으로서 국민들을 세뇌시키고 있습니다. ') 
+
+
+Notice.create!(:id=>1,:user_id=>1,:title=>'예쁘고 귀여운 수정이의 집이 다시 개장했습니다.')
+NoticeContent.create!(:id=>1,:content=>'그동안 수많은 방문자에 비해서 준비되지 못하였는데 이제 보다 업그레이드된 모습으로 다시 찾아뵙게되었습니다.
+    수정이와 소통하는 공간으로 계속 많은 이용바랍니다.')
+

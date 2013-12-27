@@ -16,7 +16,7 @@ module SecretBoard
   protected
   
   def _read_privileges
-    gg=self.edit
+    gg=self.get_gg
     @gname=gg.class.name 
     @gid=gg.id
     
@@ -52,7 +52,7 @@ module SecretBoard
   end
   
   def _read_password
-    gg=self.edit
+    gg=self.get_gg
     @gid=gg.id
     @gname=gg.class.name
     
