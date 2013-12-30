@@ -25,21 +25,16 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-
 gem 'devise', '~> 3.0.0.rc'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
-gem 'bootstrap-sass'
 gem 'fog'
 gem 'unf'
-gem 'recaptcha'
-gem 'capistrano'
-gem 'thin'
-gem 'connect'
 gem 'impressionist'
-gem 'fancybox2-rails', '~> 0.2.4'
+gem 'jquery-easing-rails'
+gem 'fancybox2-rails', :path=>"vendor/gems/fancybox2-rails"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -47,10 +42,14 @@ group :doc do
 end
 
 group :development, :test do
+  gem 'capistrano'
   gem 'capistrano-rails', '~> 1.0.0'
   gem 'sqlite3'
 end
 
 group :production do
   gem 'mysql2'
+  gem 'recaptcha'
+  gem 'thin'
+  gem 'connect'
 end
