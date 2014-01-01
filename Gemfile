@@ -14,9 +14,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -35,6 +32,7 @@ gem 'unf'
 gem 'impressionist'
 gem 'jquery-easing-rails'
 gem 'fancybox2-rails', :path=>"vendor/gems/fancybox2-rails"
+gem 'sitemap_generator'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
