@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CreateImpressionsTable < ActiveRecord::Migration
   def self.up
     create_table :impressions, :force => true do |t|

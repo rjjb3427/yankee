@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CreateBlogTypes < ActiveRecord::Migration
   def change
     create_table :blog_types do |t|

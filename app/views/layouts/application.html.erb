@@ -4,7 +4,7 @@
 <title><%=@title %></title>
 <meta charset="utf-8">
 <meta name="robots" content="<%=@meta_robot %>" />
-<meta name="application-name" content="<%=@meta_application_name %>" />
+<meta name="application-name" content="<%=@application_name %>" />
 <meta name="keywords" content="<%=@meta_keyword %>" />
 <meta name="description" content="<%=@meta_description %>" />
 <meta name="author" content="Sleeping-Lion" />
@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <link rel="shortcut icon" href="<%=asset_path('favicon.ico') %>" />
 <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", :media => "all" %>
-<%= stylesheet_link_tag @style, :media => "all" %>
+<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
 </head>
 <body>
@@ -22,39 +22,33 @@
 <%= render :partial => 'layouts/header' %>
 <section id="mom">
 	<section id="main" class="container">
-		<section class="sub_main">
-			<% unless current_page?(root_path) %>
-			<div class="page-header pull-left row-fluid">
-				<h1 class="pull-left"><%=@controller_name %></h1>
-				<ul class="breadcrumb pull-right">
-					<li><%=link_to t(:home),root_path %></li>
-					<% if @page_category %>
-					<li><%=link_to @page_category %></li>
-					<% end %>
-					<li class="active"><%=@controller_name %></li>
-				</ul>
-			</div>
-			<% end %>
-	<% unless	@menu_setting.nil? %>
-	<% if @ad && @menu_setting.ad_position_id==2 %>
-	<%= render :partial => 'layouts/ad' %>
-	<% end %>
-	<% end %>
-				<%=yield %>
-	<% unless	@menu_setting.nil? %>				
-	<% if @ad && @menu_setting.ad_position_id==3 %>
-	<%= render :partial => 'layouts/ad' %>
-	<% end %>
-	<% end %>
-			<div class="clearfix">&nbsp;</div>
-		</section>
+		<% if current_page?(root_path) %>
+		<figure id="main_img" class="hidden-xs">
+			<%=image_tag "main_back.png",:alt=>"좃같은 세상 KB가 만들어 갑니다." %>
+		</figure>		
+		<%= render :partial => 'layouts/aside' %>			
+		<% else %>
+		<div class="page-header pull-left">
+			<h1 class="pull-left"><%=@controller_name %></h1>
+			<ul class="breadcrumb pull-right">
+				<li><%=link_to t(:link_home),root_path %></li>
+				<% if @page_category %>
+				<li><%=link_to @page_category %></li>
+				<% end %>
+				<li class="active"><%=@controller_name %></li>
+			</ul>
+		</div>
+		<% end %>		
+		<section <% if current_page?(root_path) %>id="main_main"<% else %>class="sub_main"<% end %>>
+			<%=yield %>
+			<div class="clearfix">&nbsp;</div>		
+		</section>			
 	</section>
 </section>
 <%= render :partial => 'layouts/footer' %>
-<div class="slboard_overlay" id="overlay"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <%= javascript_include_tag "//cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" %>
 <%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" %>
-<%= javascript_include_tag @script %>
+<%= javascript_include_tag @script, "data-turbolinks-track" => true %>
 </body>
 </html>

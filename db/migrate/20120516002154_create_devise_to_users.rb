@@ -7,9 +7,9 @@ class CreateDeviseToUsers < ActiveRecord::Migration
       ## Database authenticatable
       t.string :email,              :null => false
       t.string :name,               :null => false
-      t.string :photo
-      t.string :description      
+      t.string :description,        :null => false      
       t.string :encrypted_password, :null => false
+      t.string :photo      
 
       ## Recoverable
       t.string   :reset_password_token

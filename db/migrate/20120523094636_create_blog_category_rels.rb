@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CreateBlogCategoryRels < ActiveRecord::Migration
   def change
     create_table :blog_category_rels do |t|

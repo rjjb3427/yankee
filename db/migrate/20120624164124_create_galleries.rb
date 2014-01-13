@@ -4,7 +4,8 @@ class CreateGalleries < ActiveRecord::Migration
   def change
     create_table :gallery_categories do |t|
       t.string :title,:null=>false
-      t.boolean :enable, :null=>false, :default=>true      
+      t.integer :galleries_count, :null=>false, :default=>0      
+      t.boolean :enable, :null=>false, :default=>true
       t.timestamps
     end  
   
