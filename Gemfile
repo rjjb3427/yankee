@@ -34,6 +34,11 @@ gem 'sitemap_generator'
 gem 'impressionist'
 gem 'ckeditor', :path=>"vendor/gems/ckeditor"
 gem 'fancybox2-rails', :path=>"vendor/gems/fancybox2-rails"
+#gem 'sprockets-webp'
+#gem 'carrierwave-webp'
+
+
+gem 'email_validator'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -10,7 +10,9 @@ Yankee::Application.routes.draw do
   resources :intro,:gallery_categories, :galleries, :faq_categories,:faqs, :notices, :site, :intro, :contacts, :notices, :histories, :portfolios  
   resources :intro, :improve, :sitemap 
   resources :usarmy    
-  resources :goodbyes      
+  resources :goodbyes
+  resources :reports
+  resources :proposes
     
   resources :blogs do
     resources :blog_comments
