@@ -24,16 +24,6 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   add_index "ad_positions", ["position"], name: "index_ad_positions_on_position", unique: true
   add_index "ad_positions", ["title"], name: "index_ad_positions_on_title", unique: true
 
-  create_table "articles", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.string   "title"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id"
-
   create_table "blog_categories", force: true do |t|
     t.integer  "blog_type_id",                           null: false
     t.string   "title",        limit: 60,                null: false
@@ -159,14 +149,9 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   add_index "galleries", ["gallery_category_id"], name: "index_galleries_on_gallery_category_id"
 
   create_table "gallery_categories", force: true do |t|
-    t.string   "title",                     null: false
-    t.boolean  "enable",     default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "goodbyes", force: true do |t|
-    t.string   "title"
+    t.string   "title",                          null: false
+    t.integer  "galleries_count", default: 0,    null: false
+    t.boolean  "enable",          default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -238,13 +223,6 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
-  create_table "improves", force: true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "intro", force: true do |t|
     t.string   "title",       null: false
     t.string   "description", null: false
@@ -286,6 +264,24 @@ ActiveRecord::Schema.define(version: 20131202102154) do
     t.datetime "updated_at"
   end
 
+  create_table "profile_photos", force: true do |t|
+    t.string   "title",      limit: 60, null: false
+    t.string   "photo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proposes", force: true do |t|
+    t.integer  "user_id",                              null: false
+    t.string   "title",      limit: 60,                null: false
+    t.text     "content"
+    t.boolean  "enabled",               default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "proposes", ["user_id"], name: "index_proposes_on_user_id"
+
   create_table "question_comments", force: true do |t|
     t.integer  "question_id",                   null: false
     t.integer  "user_id"
@@ -318,6 +314,31 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+
+  create_table "report_categories", force: true do |t|
+    t.string   "title",         limit: 60,                null: false
+    t.integer  "reports_count",            default: 0,    null: false
+    t.boolean  "enabled",                  default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "report_contents", force: true do |t|
+    t.text "content", null: false
+  end
+
+  create_table "reports", force: true do |t|
+    t.integer  "report_category_id",                              null: false
+    t.integer  "user_id",                                         null: false
+    t.string   "title",                 limit: 60,                null: false
+    t.integer  "report_comments_count",            default: 0,    null: false
+    t.boolean  "enabled",                          default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reports", ["report_category_id"], name: "index_reports_on_report_category_id"
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id"
 
   create_table "resource_photos", force: true do |t|
     t.integer  "resource_id",                           null: false
@@ -371,9 +392,9 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   create_table "users", force: true do |t|
     t.string   "email",                                  null: false
     t.string   "name",                                   null: false
-    t.string   "photo"
-    t.string   "description"
+    t.string   "description",                            null: false
     t.string   "encrypted_password",                     null: false
+    t.string   "photo"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

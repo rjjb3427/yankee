@@ -37,7 +37,6 @@ gem 'fancybox2-rails', :path=>"vendor/gems/fancybox2-rails"
 #gem 'sprockets-webp'
 #gem 'carrierwave-webp'
 
-
 gem 'email_validator'
 
 group :doc do
@@ -54,7 +53,7 @@ end
 
 group :production do
   gem 'mysql2'
-  gem 'recaptcha'
+  gem 'recaptcha'  
   gem 'asset_sync'
   gem 'thin'
   gem 'connect'
