@@ -223,6 +223,13 @@ ActiveRecord::Schema.define(version: 20131202102154) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
+  create_table "improve", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "intro", force: true do |t|
     t.string   "title",       null: false
     t.string   "description", null: false

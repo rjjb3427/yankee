@@ -336,8 +336,10 @@ ko:
       guest_book : '방명록'
       history : '연혁'
       portfolio : '제작작품'
+      propose : '철수시킬 방법제안'
+      report : '피해신고'
       user : '회원'
-      site : '사이트 소개'
+      site : '사이트 소개'      
     attributes :
       intro : 
         title : '제목'
@@ -399,6 +401,10 @@ ko:
         title : '제목'
       notice_content :
         content : '내용' 
+      propose :
+        title : '제목' 
+      report : 
+        title : '제목'
       portfolio :
         title : '제목'
         url : 'URL'

@@ -36,6 +36,10 @@ gem 'ckeditor', :path=>"vendor/gems/ckeditor"
 gem 'fancybox2-rails', :path=>"vendor/gems/fancybox2-rails"
 #gem 'sprockets-webp'
 #gem 'carrierwave-webp'
+gem 'globalize', '~> 4.0.0'
+gem 'rack-cache'
+gem 'dalli'
+gem 'kgio'
 
 gem 'email_validator'
 
