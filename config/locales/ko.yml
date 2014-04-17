@@ -53,6 +53,7 @@ ko:
   link_more : '더보기'
   link_back : '뒤로'
   link_home : '홈으로'
+  label_report_category : '피해유형'
   
   home_main_title : '제발 니네 집으로 돌아가'
   home_main_description : '니네도 안좋고 우리는 좋고 '

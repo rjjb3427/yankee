@@ -9,6 +9,10 @@ class HomeController < ApplicationController
   end
 
   def index
+      @users = User.order('id desc').page(params[:page]).per(12)
+      @user_count=User.count
+      @user = User.new    
+    
     @guest_books = GuestBook.order('id desc').page(params[:page]).per(5)
     @notices = Notice.order('id desc').page(params[:page]).per(5)
     @questions = Question.order('id desc').page(params[:page]).per(5)    
